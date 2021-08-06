@@ -1,0 +1,23 @@
+1. What are access-modifiers in Java? Explain differences between types of access modifiers.
+Access-modifiers define scope of class members accessibility.
+Public	   - accessible everywhere
+Private    - accessible only within class
+Protected  - same as public with exception where in different packages it needs to be accessed through inheritance
+Default    - accessible only within package.
+
+2. Explain differences between abstract class and interface.
+- Abstract class does not support multiple inheritance while interface does.
+- Abstract class contains constructor while interface doesn't. It is called when child class is instantiated.
+
+3. Explain difference between Collection and Collections.
+Collection is interface which groups objects in a single unit.  (e.g. Set, List, Queue)
+Collections is a class that contains methods which can be performed on Collection (e.g. sort(), max(), shuffle(), etc.)
+
+4. Why is said that Stream is lazy?
+Stream and its intermediate operations will not be executed until terminal operation is called.
+ 
+5. Explain 4 aspects of OOP.
+Encapsulation 	- Example would be hiding fields as private but having accessor properties as public.
+Abstraction	- Defining intention rather than actual implementation.
+Inheritance	- Inherit members from another class or interface
+Polymorphism	- Often related with inheritance where after class inherits members from another class/interface, by polymorphism we then use those inherited members to perform different tasks

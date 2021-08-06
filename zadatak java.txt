@@ -1,0 +1,109 @@
+1. Create new classes Worker and Manager, which will extend abstract class Employee, with attributes id, name and workingHours, following the rules of encapsulation. Id should be unique for every employee.
+
+
+2. When program starts, user will be greeted and asked to enter command.
+    If user enters "add" into console, he will be prompted to enter employee.
+    There should be 2 types of "add" command, "add w" and "add m", which will mark entry of worker or manager employee respectively.
+    User should be able to input through console employee names and their workingHours until "end" is typed into console, which will mark the end of input.
+    During employee input all Exceptions should be handled (name can't contain numbers and workingHours must be between 0 and 40).
+    If user enters "show" command, all employees will be printed into console and ordered by name.
+    If user enters "remove" command, along with id of employee, that employee will be removed.
+    If user enters "exit" command, program will exit;
+
+3. User should be able to use "search" command along with name of employee, that will output in console how many workingHours employee had.
+    If that employee doesn't exist, appropriate message should be shown to the user.
+
+
+4. Create new abstract method calculateSalary() that the classes Worker and Manager will implement.
+    It should return employee salary (Manager and Worker have different per hour salary, all workers have the same per-hour salary, all managers have the same per-hour salary)
+    Modify show command so that output also shows salary for that week.
+
+
+
+Below is sample of program execution:
+
+2.)
+
+Hello, user!
+Please enter command:
+add m
+
+Employee entry started.
+
+Please enter employee name:
+Mike
+Please enter employee workingHours:
+30
+
+Please enter employee name:
+James
+Please enter employee workingHours:
+40
+
+Please enter employee name:
+end
+
+Employee entry ended.
+Please enter command:
+add w
+
+Employee entry started.
+
+Please enter employee name:
+Alan
+Please enter employee workingHours:
+35
+
+Please enter employee name:
+Jodie
+Please enter employee workingHours:
+251
+employee can't have workingHours higher than 100.
+Please enter employee workingHours:
+25
+
+Please enter employee name:
+end
+
+Employee entry ended.
+Please enter command:
+show
+
+ID  Name     Hours_worked
+3   Alan     35
+2   James    40
+4   Jodie    25
+1   Mike     30
+
+Please enter command:
+remove 4
+
+Jodie has been removed successfully.
+
+Please enter command:
+exit
+
+3.) - this will be shown after implementing task 3
+
+...
+Please enter command:
+search James
+
+James worked 40 hours this week.
+
+Please enter command:
+search Jodie
+
+Jodie doesn't exist, please add employee first.
+
+4.) - this will be shown after implementing task 4
+
+...
+Please enter command:
+show
+
+ID  Name     Hours_worked   Salary
+3   Alan     35             350
+2   James    40             800
+4   Jodie    25             250
+1   Mike     30             600
