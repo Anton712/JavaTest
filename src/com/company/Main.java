@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    static List<Employee> employeeList = new ArrayList<Employee>();
+    // you don't have mto specify type on the right side of assignment, it is automatically assumed by JVM
+    static List<Employee> employeeList = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Hello user!");
@@ -22,10 +23,12 @@ public class Main {
 
             } else if (command.equals("show")) {
                 showEmployees();
-            } else if (command.matches("^remove?\\s\\d+")) {
+                // you don't need '?' in regex, it will match previous character 0 or more times, you can enter "remov 1" and it will pass
+            } else if (command.matches("^remove\\s\\d+")) {
                 int id = Integer.parseInt(command.split(" ")[1]);
                 removeEmployee(id);
-            } else if (command.matches("^search?\\s[A-Za-z]+$")) {
+                // you don't need '?' in regex, it will match previous character 0 or more times, you can enter "searc worker" and it will pass
+            } else if (command.matches("^search\\s[A-Za-z]+$")) {
                 String name = command.split(" ")[1];
                 searchEmployee(name);
             } else if (command.equals("exit")) {
@@ -52,7 +55,8 @@ public class Main {
                     do {
                         System.out.println("Please enter employee workingHours: ");
                         workingHours = scanner.nextLine();
-                        if (workingHours.chars().allMatch(Character::isDigit) && (Integer.parseInt(workingHours) > 0 || Integer.parseInt(workingHours) < 40)) {
+                        // && instead of || because every input of workingHours will be valid because it is greater than 0
+                        if (workingHours.chars().allMatch(Character::isDigit) && (Integer.parseInt(workingHours) > 0 && Integer.parseInt(workingHours) <= 40)) {
                             break;
                         } else {
                             System.out.println("workingHours must be a number between 0 and 40.");
@@ -70,14 +74,17 @@ public class Main {
 
     public static void showEmployees() {
         System.out.printf("%-5s %-12s %-14s %-7s\n", "ID", "Name", "Hours_worked", "Salary");
-        for (Employee employee : employeeList) {
-            System.out.printf("%-5s %-12s %-14s %-7s\n", employee.getId(), employee.getName(), employee.getWorkingHours(), employee.calculateSalary());
-        }
+        // you forgot to sort the employees
+//         for (Employee employee : employeeList) {
+//             System.out.printf("%-5s %-12s %-14s %-7s\n", employee.getId(), employee.getName(), employee.getWorkingHours(), employee.calculateSalary());
+//         }
+        employeeList.stream().sorted(Comparator.comparing(Employee::getName)).forEach(employee -> System.out.printf("%-5s %-12s %-14s %-7s\n", employee.getId(), employee.getName(), employee.getWorkingHours(), employee.calculateSalary()));
         System.out.println();
     }
 
     public static void removeEmployee(int id) {
-        var employee = employeeList.stream().filter(empl -> empl.getId() == id).findAny().orElse(null);
+        // use base class type instead of var
+        Employee employee = employeeList.stream().filter(empl -> empl.getId() == id).findAny().orElse(null);
 
         if (employeeList.remove(employee)) {
             System.out.printf("%s has been removed successfully.\n\n", employee.getName());
@@ -88,7 +95,8 @@ public class Main {
 
 
     public static void searchEmployee(String name) {
-        var employee = employeeList.stream().filter(empl -> empl.getName().equals(name)).findAny().orElse(null);
+        // use base class type instead of var
+        Employee employee = employeeList.stream().filter(empl -> empl.getName().equals(name)).findAny().orElse(null);
 
         if (employee != null) {
             System.out.printf("%s worked %d hours this week.\n\n", employee.getName(), employee.getWorkingHours());
